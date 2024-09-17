@@ -42,5 +42,6 @@ public class Main {
                 }
             } while (userOption != 4);
         }
+        scanner.close();
     }
 }
