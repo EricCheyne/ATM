@@ -1,6 +1,6 @@
 package com.simple.atm;
 
-public class Account implements Transactions {
+public abstract class Account implements Transactions {
 
     // feature to auto increment account number
     private static int nextAccountNumber = 1001;
