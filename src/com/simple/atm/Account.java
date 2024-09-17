@@ -1,5 +1,7 @@
 package com.simple.atm;
 
+import java.io.*;
+
 public abstract class Account implements Transactions {
 
     // feature to auto increment account number
@@ -41,6 +43,7 @@ public abstract class Account implements Transactions {
             return false;
         }
         balance -= debitAmt;
+        Transactions.recordTransaction(debitAmt, "Debit");
         System.out.println("Please remove your card and money.");
         return true;
     }
@@ -48,6 +51,7 @@ public abstract class Account implements Transactions {
     @Override
     public boolean deposit(double creditAmt) {
         balance += creditAmt;
+        Transactions.recordTransaction(creditAmt, "Credit");
         System.out.println("Deposit successful.");
         return false;
     }
@@ -55,5 +59,24 @@ public abstract class Account implements Transactions {
     @Override
     public double getBalance() {
         return balance;
+    }
+
+    public boolean printTransaction(){
+        StringBuilder content = new StringBuilder();
+
+        try(BufferedReader reader = new BufferedReader((new FileReader("transactions.txt")))){
+            String currentLine;
+            while((currentLine = reader.readLine()) != null){
+                content.append(currentLine).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        System.out.println(content);
+        return true;
     }
 }

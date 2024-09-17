@@ -12,6 +12,8 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
+        account1.printTransaction();
+
         ATM atm = new ATM();
 
         pinNum = scanner.nextInt();
